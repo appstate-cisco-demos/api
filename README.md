@@ -9,6 +9,13 @@ Confirm that Docker is installed on your machine by running the following comman
 docker --version
 ```
 
+### Clone this repository to your local machine
+
+```
+git clone https://github.com/appstate-cisco-demos/api.git
+```
+
+## Local development pre-requisites
 ### Download Java 20.0.2
 Go to https://www.oracle.com/java/technologies/javase/jdk20-archive-downloads.html and download Java based on your machine's OS
 
@@ -18,35 +25,33 @@ Confirm that Java is installed on your machine by running the following command:
 java --version
 ```
 
-### Clone this repository to your local machine
-
-```
-git clone https://github.com/appstate-cisco-demos/api.git
-```
-
-## Building the Docker image
-
-To build the Docker image that this repository uses, run the following command:
-
-```
-docker build -t <image_name> <path_to_Dockerfile>
-```
-
-
 ## Running Docker containers
 
-To deploy the container and run the server, run the following commands:
+To deploy the api and initialize the database, run the following command:
 
 ```
-docker run -p 8080:8080 <image_name>
+docker compose up --build
 ```
-To see server responses, run the following command:
+
+## Stopping Docker containers
+
+If you didn't detach from the docker-compose:
 
 ```
-curl localhost:8080
+ctrl + c
 ```
-To have an interactive terminal inside of the container, run the following command:
+
+If you detached from the docker-compose or are using another terminal:
+```
+docker compose down
+```
+
+## Using endpoints
+
+This api contains [GET, PUT, POST, and DELETE](https://www.contrive.mobi/aviorapi/HTTPMETHODS.html) endpoints. To use them, you can either use [postman](https://www.postman.com/downloads/) (recommended) or curl
+
+Example of curl command:
 
 ```
-docker run -it -p 8080:8080 <image_name> /bin/bash
+curl -X POST -H "Content-Type: application/json" -d '{"key1": "value1", "key2": "value2"}' http://example.com/api/endpoint
 ```

@@ -20,3 +20,11 @@ services:
             - "8080:8080"
         depends_on:
             - "mongodb"
+
+    init:
+        container_name: initialize_database
+        build:
+            context: ./init
+            dockerfile: Dockerfile.init
+        depends_on:
+            - "mongodb"

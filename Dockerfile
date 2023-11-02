@@ -15,4 +15,4 @@ RUN mvn install
 EXPOSE 8080
 
 # Define the command to run your Java application
-CMD ["sh", "-c", "sleep 10 && java -jar target/demo-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "target/demo-0.0.1-SNAPSHOT.jar"]
