@@ -1,14 +1,18 @@
-# Use a base image with Java
-FROM openjdk:11-jdk-slim
+# Use maven image
+FROM maven:3.9.4-eclipse-temurin-11
 
-# Set the working directory
-WORKDIR /app
+# Create the directory structure
+RUN mkdir -p /home/project1/app
+WORKDIR /home/project1/app
 
-# Copy the Init.java file into the container
-COPY Init.java .
+# Copy the source code to the container
+COPY . /home/project1/app
 
-# Compile and run the Java application
-RUN javac Init.java
+# Build the Java project using Maven
+RUN mvn install
 
-# Run the Java application
-CMD ["java", "Init"]
+# Expose the port your application will listen on
+EXPOSE 8080
+
+# Define the command to run your Java application
+CMD ["sh", "-c", "sleep 10 && java -jar target/demo-0.0.1-SNAPSHOT.jar"]
