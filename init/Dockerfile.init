@@ -1,0 +1,11 @@
+FROM node:21
+
+WORKDIR /app
+
+COPY package*.json ./
+COPY init.js ./
+COPY Dockerfile.init ./
+
+RUN npm install
+
+CMD ["node", "init.js"]
